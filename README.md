@@ -1,10 +1,13 @@
-# deep-thought
+# Deep Thought
 
-A Clojure library designed to ... well, that part is up to you.
+A Clojure library to perform Deep Learning.
+
+## Requirements
+[core.matrix](https://clojars.org/net.mikera/core.matrix)
 
 ## Usage
 
-FIXME
+Still very much a work in progress.
 
 ## License
 
