@@ -14,7 +14,7 @@ This project is the personal work of Eoin Hurrell and contributors. It is not su
 
 ## License
 
-Copyright © 2014 Eoin Hurrell 
+Copyright © 2014 Eoin Hurrell and contributors.
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
