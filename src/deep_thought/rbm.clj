@@ -1,7 +1,12 @@
-(ns logreg.core)
-class RBM(object):
+(ns logreg.core
+  (:require
+   [clojure.core.matrix.operators :as M]))
+
+(defn sigmoid [z]
+  (M// 1 (M/+ 1 (exp (M/- z)))))
 
 ;; DEF 
+;; class RBM(object):
 ;;  def __init__(self, input=None, n_visible=784, n_hidden=500,
 ;; W=None, hbias=None, vbias=None, numpy_rng=None, theano_rng=None):
 ;;                """
@@ -99,10 +104,10 @@ class RBM(object):
   [v0-sample]
   (let [
         [pre-sigmoid-h1 h1-mean] (propup v0-sample)
-         h1-sample (binomial-sample  ; h1_sample = self.theano_rng.binomial(
-                    (shape h1-mean)  ; size=v1_mean.shape,
-                    1                ; n=1,
-                    h1-mean)         ; p=v1_mean, dtype=theano.config.floatX)
+         h1-sample (binomial-distribution ; h1_sample = self.theano_rng.binomial(
+                    (shape h1-mean)       ; size=v1_mean.shape,
+                    ;1                     ; n=1,
+                    h1-mean)              ; p=v1_mean, dtype=theano.config.floatX)
          ]
     [pre-sigmoid-h1 h1-mean h1-sample]))
 
@@ -130,10 +135,10 @@ class RBM(object):
   "This function infers state of visible units given hidden units"
   [h0-sample]
   (let [ [pre-sigmoid-v1 v1-mean] (propdown h0-sample)
-         v1-sample (binomial-sample  ; v1_sample = self.theano_rng.binomial(
-                    (shape v1-mean)  ; size=v1_mean.shape, 
-                    1                ; n=1, 
-                    v1-mean)         ; p=v1_mean, dtype=theano.config.floatX)
+         v1-sample (binomial-distribution  ; v1_sample = self.theano_rng.binomial(
+                    (shape v1-mean)        ; size=v1_mean.shape, 
+                    ;1                      ; n=1, 
+                    v1-mean)               ; p=v1_mean, dtype=theano.config.floatX)
          ]
     [pre-sigmoid-v1 v1-mean v1-sample]))
 
@@ -178,15 +183,11 @@ class RBM(object):
 ;; def get_cost_updates(self, lr=0.1, persistent=None, k=1):
 (defn get-cost-updates
   "This functions implements one step of CD-k or PCD-k
-  
   :param lr: learning rate used to train the RBM
-
   :param persistent: None for CD. For PCD, shared variable
   containing old state of Gibbs chain. This must be a shared
   variable of size (batch size, number of hidden units).
-  
   :param k: number of Gibbs steps to do in CD-k/PCD-k
-
   Returns a proxy for the cost and the updates dictionary. The
   dictionary contains the update rules for weights and biases but
   also an update of the shared variable used to store the persistent
