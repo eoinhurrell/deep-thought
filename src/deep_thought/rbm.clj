@@ -1,9 +1,11 @@
-(ns logreg.core
+(ns deep-thought.rbm
+  (:use clojure.core.matrix)
   (:require
+   [incanter.distributions :as dist]
    [clojure.core.matrix.operators :as M]))
 
 (defn sigmoid [z]
-  (M// 1 (M/+ 1 (exp (M/- z)))))
+  (M// 1 (M/+ 1 (Math/exp (M/- z)))))
 
 ;; DEF 
 ;; class RBM(object):
@@ -104,7 +106,7 @@
   [v0-sample]
   (let [
         [pre-sigmoid-h1 h1-mean] (propup v0-sample)
-         h1-sample (binomial-distribution ; h1_sample = self.theano_rng.binomial(
+         h1-sample (dist/binomial-distribution ; h1_sample = self.theano_rng.binomial(
                     (shape h1-mean)       ; size=v1_mean.shape,
                     ;1                     ; n=1,
                     h1-mean)              ; p=v1_mean, dtype=theano.config.floatX)
@@ -127,15 +129,15 @@
     [pre-sigmoid-activation (sigmoid pre-sigmoid-activation)])
   )
 
-        pre_sigmoid_activation = T.dot(hid, self.W.T) + self.vbias
-        return [pre_sigmoid_activation, T.nnet.sigmoid(pre_sigmoid_activation)]
+        ;; pre_sigmoid_activation = T.dot(hid, self.W.T) + self.vbias
+        ;; return [pre_sigmoid_activation, T.nnet.sigmoid(pre_sigmoid_activation)]
 ;; DEF
 ;; def sample_v_given_h(self, h0_sample):
 (defn sample-v-given-h
   "This function infers state of visible units given hidden units"
   [h0-sample]
   (let [ [pre-sigmoid-v1 v1-mean] (propdown h0-sample)
-         v1-sample (binomial-distribution  ; v1_sample = self.theano_rng.binomial(
+         v1-sample (dist/binomial-distribution  ; v1_sample = self.theano_rng.binomial(
                     (shape v1-mean)        ; size=v1_mean.shape, 
                     ;1                      ; n=1, 
                     v1-mean)               ; p=v1_mean, dtype=theano.config.floatX)
