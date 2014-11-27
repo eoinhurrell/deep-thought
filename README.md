@@ -4,13 +4,14 @@ A Clojure library to perform Deep Learning.
 
 ## Requirements
 [core.matrix](https://clojars.org/net.mikera/core.matrix)
+[incanter](https://github.com/incanter/incanter)
 
 ## Usage
 
 Still very much a work in progress. The idea is to recreate a Deep Learning algorithm in Clojure. I'll be creating the components from research into existing implementation including Theano.
 
 ## Disclaimer
-This project is the personal work of Eoin Hurrell and contributors. It is not supported by any entity, including Timothy's employer, or any employers of any other contributors.  
+This project is the personal work of Eoin Hurrell and contributors. It is not supported by any entity, including Eoin's employer, or any employers of any other contributors.  
 
 ## License
 
