@@ -10,7 +10,10 @@
   [x]
   (M// 1 (M/+ 1 (exp (M/- x)))))
 
-(defn step-fn
+(defn sample-layer
+  [])
+
+(defn cycle-fn
   "Function to take one step in RBM learning"
   [rbm learning-rate]
   ;; hidden 0 input (matrix mul prev-res wts) propagate down
