@@ -1,4 +1,5 @@
 (ns deep-thought.mlp
+  (:use clojure.core.matrix)
   (:use clojure.test))
 ;; Heavily influenced by implementation http://www.fatvat.co.uk/
 
